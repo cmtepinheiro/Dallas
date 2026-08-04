@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dallas Autonomous Systems</title>
+    <meta name="description" content="Engineering the next generation of autonomous rotary aircraft.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- LOADER -->
+    <div id="loader">
+        <div class="loader-logo">DALLAS <span>INDUSTRIES</span></div>
+        <div class="boot-log" id="bootLog" aria-hidden="true"></div>
+        <video class="boot-start-video" id="bootStartVideo" muted playsinline hidden>
+            <source src="boot-start.mp4" type="video/mp4">
+        </video>
+        <div class="loader-line"></div>
+    </div>
+
+    <!-- SCROLL FLIGHT TRAIL -->
+    <div class="scroll-trail" id="scrollTrail" aria-hidden="true">
+        <div class="scroll-trail-fill" id="scrollTrailFill"></div>
+        <div class="scroll-trail-dot" id="scrollTrailDot"></div>
+    </div>
+
+    <!-- HUD SCANLINE OVERLAY -->
+    <div id="hud-overlay" aria-hidden="true"></div>
+
+    <!-- BACKGROUND -->
+    <div id="background-grid"></div>
+    <div id="background-glow"></div>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="logo"><span class="logo-main">DALLAS</span><span class="logo-sub">INDUSTRIES</span></div>
+        <nav>
+            <a href="#manifesto" data-i18n="nav.mission">Mission</a>
+            <a href="#technology" data-i18n="nav.technology">Technology</a>
+            <a href="#specifications" data-i18n="nav.specifications">Specifications</a>
+            <a href="#performance" data-i18n="nav.performance">Performance</a>
+            <a href="#platforms" data-i18n="nav.platforms">Platforms</a>
+            <a href="#investment" data-i18n="nav.investment">Investment</a>
+            <a href="#applications" data-i18n="nav.applications">Applications</a>
+            <a href="#contact" data-i18n="nav.contact">Contact</a>
+        </nav>
+        <div class="header-right">
+            <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
+                <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+                <span class="lang-divider">/</span>
+                <button type="button" class="lang-btn" data-lang="pt" aria-pressed="false">PT</button>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img class="hero-video" src="hero-bg.jpg" alt="Dallas Autonomous helicopter">
+            <div class="hero-bg-overlay"></div>
+        </div>
+
+        <div class="hero-content">
+            <span class="tag" data-i18n="hero.tag">DEVELOPED IN BRAZIL</span>
+            <h1 data-i18n-html="hero.title">Autonomous<br>Rotary Aircraft</h1>
+            <p data-i18n="hero.desc">
+                Engineering the next generation of heavy-duty autonomous
+                helicopter platforms for defense, offshore,
+                agribusiness and critical missions.
+            </p>
+            <div class="buttons">
+                <a href="#technology" class="btn-primary" data-i18n="hero.btnPrimary">Explore Technology</a>
+                <a href="#manifesto" class="btn-secondary" data-i18n="hero.btnSecondary">Our Vision</a>
+            </div>
+        </div>
+
+        <div class="hero-right">
+            <div class="wireframe-circle">
+                <div class="rotor rotor-horizontal"></div>
+                <div class="rotor rotor-vertical"></div>
+                <video class="hero-circle-video" autoplay muted loop playsinline>
+                    <source src="hero-circle-loop.mp4" type="video/mp4">
+                </video>
+                <div class="core"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MANIFESTO -->
+    <section class="manifesto" id="manifesto">
+        <small data-i18n="manifesto.small">OUR PURPOSE</small>
+        <h2 data-i18n-html="manifesto.title">
+            We are not adapting helicopters.<br>
+            We are engineering autonomous aircraft from the ground up.
+        </h2>
+        <p data-i18n="manifesto.desc">
+            Dallas exists to redefine how medium and heavy autonomous aircraft
+            operate. Our mission is to build robust rotary platforms capable of
+            performing critical operations where reliability, payload and
+            endurance matter.
+        </p>
+        <p class="manifesto-note" data-i18n="manifesto.note">
+            Dallas is an autonomous vehicle company at its core — the helicopter
+            is our flagship platform, not our limit.
+        </p>
+        <img src="manifesto-visual.jpg" alt="Dallas Autonomous helicopter approaching offshore platform" class="manifesto-visual">
+        <audio id="manifestoAudio" src="helicopter-sound.mp3" preload="auto"></audio>
+    </section>
+
+    <!-- COCKPIT PANEL -->
+    <section class="cockpit-panel reveal">
+        <div class="instrument">
+            <div class="instrument-main">
+                <div class="instrument-header" data-i18n="cockpit.header">FLIGHT COMPUTER</div>
+
+                <div class="instrument-time">
+                    <div>
+                        <span>UTC</span>
+                        <h2 id="utcClock">00:00:00</h2>
+                    </div>
+                    <div>
+                        <span data-i18n="cockpit.local">LOCAL</span>
+                        <h2 id="localClock">00:00:00</h2>
+                    </div>
+                </div>
+
+                <div class="instrument-data">
+                    <div>
+                        <small data-i18n="cockpit.status">STATUS</small>
+                        <strong data-i18n="cockpit.statusValue">MISSION READY</strong>
+                    </div>
+                    <div>
+                        <small data-i18n="cockpit.navigation">NAVIGATION</small>
+                        <strong>GNSS + INS</strong>
+                    </div>
+                    <div>
+                        <small data-i18n="cockpit.control">CONTROL</small>
+                        <strong data-i18n="cockpit.controlValue">AUTONOMOUS</strong>
+                    </div>
+                </div>
+
+                <div class="instrument-clip">
+                    <div class="instrument-feed-bar">
+                        <span class="feed-dot"></span>
+                        <span data-i18n="cockpit.feedLabel">GCS — REFERENCE FEED</span>
+                    </div>
+                    <img src="gcs-feed.png" alt="Dallas ground control station interface" class="gcs-thumb">
+                </div>
+            </div>
+
+            <div class="instrument-feed" id="instrumentClip">
+                <div class="instrument-feed-bar">
+                    <span class="feed-dot"></span>
+                    <span data-i18n="cockpit.clipLabel">HOVER TEST — HOVER FOR AUDIO</span>
+                </div>
+                <video id="hoverClipVideo" autoplay muted loop playsinline>
+                    <source src="hover-test.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- AIRCRAFT SPECIFICATIONS -->
+    <section class="blueprint reveal" id="specifications">
+        <small data-i18n="blueprint.small">AIRCRAFT SPECIFICATIONS</small>
+        <h2 data-i18n="blueprint.title">Engineered for the mission.</h2>
+
+        <div class="blueprint-grid">
+            <div class="blueprint-diagram">
+                <img src="aircraft-profile.jpg" alt="Dallas Autonomous helicopter — real prototype" class="blueprint-photo">
+                <svg class="blueprint-overlay" viewBox="0 0 576 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Aircraft dimension overlay">
+                    <defs>
+                        <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                            <path d="M0,0 L8,4 L0,8 Z" fill="var(--accent)"></path>
+                        </marker>
+                    </defs>
+
+                    <line x1="55" y1="10" x2="525" y2="10" class="dim-line" marker-start="url(#arrow)" marker-end="url(#arrow)"></line>
+                    <text x="290" y="24" class="dim-label" text-anchor="middle">5.8 m</text>
+
+                    <line x1="35" y1="20" x2="35" y2="345" class="dim-line" marker-start="url(#arrow)" marker-end="url(#arrow)"></line>
+                    <text x="14" y="185" class="dim-label" text-anchor="middle" transform="rotate(-90 14 185)">2.2 m</text>
+
+                    <line x1="45" y1="365" x2="545" y2="365" class="dim-line" marker-start="url(#arrow)" marker-end="url(#arrow)"></line>
+                    <text x="295" y="390" class="dim-label" text-anchor="middle">6.5 m</text>
+                </svg>
+            </div>
+
+            <div class="blueprint-specs">
+                <div><small data-i18n="blueprint.mtow">MTOW</small><strong>330 kg</strong></div>
+                <div><small data-i18n="blueprint.payload">Payload</small><strong>130 kg <span class="spec-up">↑</span></strong></div>
+                <div><small data-i18n="blueprint.empty">Empty Weight</small><strong>180 kg</strong></div>
+                <div><small data-i18n="blueprint.power">Power</small><strong>64–120 hp</strong></div>
+                <div><small data-i18n="blueprint.engine">Engine</small><strong>Rotax / Turbine MZ202</strong></div>
+                <div><small data-i18n="blueprint.trl">Maturity</small><strong data-i18n="blueprint.trlValue">TRL 6 — Real-world flight testing</strong></div>
+            </div>
+        </div>
+
+        <div class="modular-block">
+            <small data-i18n="blueprint.modularTitle">ADAPTIVE PLATFORM</small>
+            <p data-i18n="blueprint.modularDesc">One airframe, reconfigured for the mission. The same platform accepts a wide range of interchangeable payloads:</p>
+            <div class="modular-tags">
+                <span data-i18n="blueprint.modular1">Imaging Payloads</span>
+                <span data-i18n="blueprint.modular2">Military Arsenal</span>
+                <span data-i18n="blueprint.modular3">Cargo Compartment</span>
+                <span data-i18n="blueprint.modular4">Mounts &amp; Brackets</span>
+                <span data-i18n="blueprint.modular5">Cargo Hooks</span>
+                <span data-i18n="blueprint.modular6">Medical Stretcher — Transport &amp; Rescue</span>
+                <span data-i18n="blueprint.modular7">Auxiliary Fuel Tanks</span>
+                <span data-i18n="blueprint.modular8">Spray Bar</span>
+                <span class="modular-tag--custom" data-i18n="blueprint.modular9">+ Whatever the Mission Requires</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNOLOGIES -->
+    <section class="technology reveal" id="technology">
+        <h2 data-i18n="technology.title">Core Technologies</h2>
+
+        <div class="tech-grid">
+            <div class="tech-card">
+                <h3 data-i18n="technology.card1.title">Autonomous Flight</h3>
+                <p data-i18n="technology.card1.desc">Mission execution with minimal operator intervention.</p>
+            </div>
+            <div class="tech-card">
+                <h3 data-i18n="technology.card2.title">Heavy Payload</h3>
+                <p data-i18n="technology.card2.desc">Designed for demanding logistics and military operations.</p>
+            </div>
+            <div class="tech-card">
+                <h3 data-i18n="technology.card3.title">Precision Navigation</h3>
+                <p data-i18n="technology.card3.desc">Centimeter-level positioning using advanced GNSS integration.</p>
+            </div>
+            <div class="tech-card">
+                <h3 data-i18n="technology.card4.title">Fail Safe</h3>
+                <p data-i18n="technology.card4.desc">Redundant architecture for maximum operational reliability.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FLIGHT PERFORMANCE -->
+    <section class="performance reveal" id="performance">
+        <small data-i18n="performance.small">FLIGHT PERFORMANCE</small>
+        <h2 data-i18n="performance.title">Real telemetry, not projected specs.</h2>
+
+        <div class="gauges-grid">
+            <div class="gauge" data-value="140" data-max="160" data-unit="km/h">
+                <div class="gauge-dial"></div>
+                <p class="gauge-label" data-i18n="performance.max">Max Speed</p>
+            </div>
+
+            <div class="gauge" data-value="500" data-max="600" data-unit="km">
+                <div class="gauge-dial"></div>
+                <p class="gauge-label" data-i18n="performance.range">Autonomous Mission Range</p>
+            </div>
+
+            <div class="gauge" data-value="30000" data-max="30000" data-unit="ft">
+                <div class="gauge-dial"></div>
+                <p class="gauge-label" data-i18n="performance.ceiling">Service Ceiling</p>
+                <p class="gauge-subnote" data-i18n="performance.ceilingNote">10,000 ft (piston) · 30,000 ft (turbine)</p>
+            </div>
+        </div>
+        <p class="performance-note" data-i18n="performance.note">Extended range via fixed antenna (200 km) or satellite link (unlimited).</p>
+    </section>
+
+    <!-- MISSION DATA -->
+    <section class="stats reveal">
+        <div class="stat">
+            <div class="stat-value-row">
+                <h1 data-counter="130">0</h1>
+                <span class="spec-up">↑</span>
+            </div>
+            <p data-i18n="stats.payload">kg Payload</p>
+        </div>
+        <div class="stat">
+            <h1 data-counter="100">0</h1>
+            <p data-i18n="stats.autonomous">% Autonomous</p>
+        </div>
+        <div class="stat">
+            <h1 data-counter="8">0</h1>
+            <p data-i18n="stats.ready">Hours Endurance</p>
+        </div>
+        <div class="stat">
+            <h1 data-counter="500">0</h1>
+            <p data-i18n="stats.datalink">km Range</p>
+        </div>
+    </section>
+
+    <!-- PLATFORMS -->
+    <section class="platforms reveal" id="platforms">
+        <small data-i18n="platforms.small">PLATFORMS</small>
+        <h2 data-i18n="platforms.title">Built for multiple missions, from one airframe.</h2>
+        <div class="platforms-grid">
+            <a href="platform-defense.html" class="platform-card platform-card--defense">
+                <span class="platform-index" data-i18n="platforms.defense.name">Defense</span>
+                <p data-i18n="platforms.defense.desc">ISR, logistics resupply and force protection in contested environments, without risking a crew.</p>
+                <span class="platform-explore" data-i18n="platforms.explore">Click Here → Explore Operations</span>
+            </a>
+            <a href="platform-offshore.html" class="platform-card platform-card--offshore">
+                <span class="platform-index" data-i18n="platforms.offshore.name">Offshore</span>
+                <p data-i18n="platforms.offshore.desc">Cargo and equipment transfer to platforms, reducing exposure in high-risk maritime operations.</p>
+                <span class="platform-explore" data-i18n="platforms.explore">Click Here → Explore Operations</span>
+            </a>
+            <a href="platform-agribusiness.html" class="platform-card platform-card--agro">
+                <span class="platform-index" data-i18n="platforms.agro.name">Agribusiness</span>
+                <p data-i18n="platforms.agro.desc">Heavy-duty aerial support for large-scale operations across remote and difficult terrain.</p>
+                <span class="platform-explore" data-i18n="platforms.explore">Click Here → Explore Operations</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- INVESTMENT OPPORTUNITY -->
+    <section class="investment reveal" id="investment">
+        <small data-i18n="investment.small">INVESTMENT OPPORTUNITY</small>
+        <h2 data-i18n="investment.title">Backed by real market demand, not projection.</h2>
+        <p data-i18n="investment.desc">Brazil is the world's largest and most professionalized agricultural export market — and precision aerial application is its clearest technology gap.</p>
+
+        <div class="investment-grid">
+            <div class="investment-stat">
+                <strong>R$ 43,5 Bi</strong>
+                <span data-i18n="investment.market">Addressable Market</span>
+            </div>
+            <div class="investment-stat">
+                <strong>79%</strong>
+                <span data-i18n="investment.roi">Dallas Annual ROI <em data-i18n="investment.roiNote">(vs. 56% market avg.)</em></span>
+            </div>
+            <div class="investment-stat">
+                <strong>80%</strong>
+                <span data-i18n="investment.cagr">Revenue CAGR, 2023–2033e</span>
+            </div>
+        </div>
+        <p class="investment-footnote" data-i18n="investment.footnote">Backed by FAPESP PIPE research grant (Phase II approved).</p>
+    </section>
+
+    <!-- MARKET POSITIONING -->
+    <section class="positioning reveal">
+        <small data-i18n="positioning.small">MARKET POSITIONING</small>
+        <h2 data-i18n="positioning.title">A unique balance of precision, versatility and scale.</h2>
+
+        <div class="radar-wrap">
+            <svg viewBox="0 0 520 520" class="radar-chart" role="img" aria-label="Comparison radar chart: Dallas vs traditional tractors, agricultural aviation and current drones">
+                <g class="radar-grid">
+                    <polygon points="260.0,202.8 309.5,231.4 309.5,288.6 260.0,317.2 210.5,288.6 210.5,231.4"></polygon>
+                    <polygon points="260.0,169.6 338.3,214.8 338.3,305.2 260.0,350.4 181.7,305.2 181.7,214.8"></polygon>
+                    <polygon points="260.0,136.4 367.0,198.2 367.0,321.8 260.0,383.6 153.0,321.8 153.0,198.2"></polygon>
+                    <polygon points="260.0,103.2 395.8,181.6 395.8,338.4 260.0,416.8 124.2,338.4 124.2,181.6"></polygon>
+                    <polygon points="260.0,70.0 424.5,165.0 424.5,355.0 260.0,450.0 95.5,355.0 95.5,165.0" class="radar-grid-outer"></polygon>
+                </g>
+                <g class="radar-axes">
+                    <line x1="260" y1="260" x2="260.0" y2="70.0"></line>
+                    <line x1="260" y1="260" x2="424.5" y2="165.0"></line>
+                    <line x1="260" y1="260" x2="424.5" y2="355.0"></line>
+                    <line x1="260" y1="260" x2="260.0" y2="450.0"></line>
+                    <line x1="260" y1="260" x2="95.5" y2="355.0"></line>
+                    <line x1="260" y1="260" x2="95.5" y2="165.0"></line>
+                </g>
+
+                <polygon points="260.0,169.6 424.5,165.0 395.8,338.4 260.0,450.0 95.5,355.0 210.5,231.4" class="radar-series radar-series--traditional"></polygon>
+                <polygon points="260.0,70.0 367.0,198.2 338.3,305.2 260.0,450.0 95.5,355.0 181.7,214.8" class="radar-series radar-series--agaviation"></polygon>
+                <polygon points="260.0,169.6 309.5,231.4 424.5,355.0 260.0,317.2 210.5,288.6 124.2,181.6" class="radar-series radar-series--drones"></polygon>
+                <polygon points="260.0,103.2 338.3,214.8 424.5,355.0 260.0,383.6 153.0,321.8 95.5,165.0" class="radar-series radar-series--dallas"></polygon>
+
+                <g class="radar-labels">
+                    <text x="260.0" y="36.1" text-anchor="middle" data-i18n="positioning.axis1">PRODUCTIVITY (HA/H)</text>
+                    <text x="454.4" y="146.1" text-anchor="start" data-i18n="positioning.axis2">UNINTERRUPTED OPS</text>
+                    <text x="454.4" y="373.9" text-anchor="start" data-i18n="positioning.axis3">APPLICATION PRECISION</text>
+                    <text x="260.0" y="503.9" text-anchor="middle" data-i18n="positioning.axis4">LARGE-AREA FIT</text>
+                    <text x="65.6" y="373.9" text-anchor="end" data-i18n="positioning.axis5">COST-EFFICIENCY</text>
+                    <text x="65.6" y="146.1" text-anchor="end" data-i18n="positioning.axis6">DIFFICULT-ACCESS OPS</text>
+                </g>
+            </svg>
+
+            <div class="radar-legend">
+                <span class="legend-item"><i class="legend-swatch legend-swatch--dallas"></i><span data-i18n="positioning.legendDallas">Dallas</span></span>
+                <span class="legend-item"><i class="legend-swatch legend-swatch--agaviation"></i><span data-i18n="positioning.legendAg">Agricultural Aviation</span></span>
+                <span class="legend-item"><i class="legend-swatch legend-swatch--drones"></i><span data-i18n="positioning.legendDrones">Current Drones</span></span>
+                <span class="legend-item"><i class="legend-swatch legend-swatch--traditional"></i><span data-i18n="positioning.legendTraditional">Traditional (Tractors)</span></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- APPLICATIONS / CTA -->
+    <section class="applications reveal" id="applications">
+        <h2 data-i18n="applications.title">There is no work. Only Mission.</h2>
+        <p data-i18n="applications.desc">
+            A single platform, engineered to operate where crewed aircraft
+            cannot, and where the mission cannot wait.
+        </p>
+    </section>
+
+    <!-- CONTACT -->
+    <footer id="contact">
+        <div class="footer-inner">
+            <div class="logo"><span class="logo-main">DALLAS</span><span class="logo-sub">INDUSTRIES</span></div>
+            <p data-i18n="footer.tagline">Autonomous rotary aircraft, engineered in Brazil.</p>
+            <div class="footer-contact">
+                <a href="mailto:Dallas_Ind@gmail.com" class="btn-primary">Dallas_Ind@gmail.com</a>
+                <a href="https://wa.me/55129200040011" target="_blank" rel="noopener" class="btn-secondary">WhatsApp — Paulo Pinheiro</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCROLL INDICATOR -->
+    <div class="scroll-indicator" data-i18n="scroll">SCROLL</div>
+
+    <script src="i18n.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
