@@ -1,0 +1,41 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#	new file:   aircraft-profile.jpg
+#	new file:   boot-start.mp4
+#	new file:   gcs-feed.png
+#	new file:   hero-bg.jpg
+#	new file:   hero-circle-loop.mp4
+#	new file:   hover-test.mp4
+#	new file:   i18n.js
+#	new file:   index.html
+#	new file:   manifesto-visual.jpg
+#	new file:   platform-agribusiness-bg.jpg
+#	new file:   platform-agribusiness.html
+#	new file:   platform-defense-bg.jpg
+#	new file:   platform-defense.html
+#	new file:   platform-offshore-bg.jpg
+#	new file:   platform-offshore.html
+#	new file:   platform.css
+#	new file:   script.js
+#	new file:   style.css
+#
+# Changes not staged for commit:
+#	modified:   i18n.js
+#	modified:   index.html
+#	modified:   manifesto-visual.jpg
+#	modified:   platform-agribusiness.html
+#	modified:   platform-defense.html
+#	modified:   platform-offshore.html
+#	modified:   script.js
+#	modified:   style.css
+#
+# Untracked files:
+#	helicopter-sound.mp3
+#	uav-300x.jpg
+#
