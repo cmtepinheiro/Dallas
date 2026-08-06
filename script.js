@@ -102,9 +102,21 @@ function runBootSequence(onComplete) {
 
         startVideo.addEventListener("ended", finish);
 
-        const tryPlay = () => startVideo.play().catch(() => {
-            /* autoplay blocked — fall back to timer below */
-        });
+        // Try to play with sound first; if the browser blocks unmuted
+        // autoplay (iOS Safari, Chrome mobile without a user gesture yet),
+        // fall back to a muted play so the video still shows visually.
+        const tryPlay = () => {
+            startVideo.muted = false;
+            const playPromise = startVideo.play();
+            if (playPromise && typeof playPromise.catch === "function") {
+                playPromise.catch(() => {
+                    startVideo.muted = true;
+                    startVideo.play().catch(() => {
+                        /* still blocked — fall back to timer below */
+                    });
+                });
+            }
+        };
 
         if (startVideo.readyState >= 2) {
             tryPlay();
@@ -118,7 +130,7 @@ function runBootSequence(onComplete) {
     }, revealDelay);
 }
 
-window.addEventListener("load", () => {
+document.addEventListener("DOMContentLoaded", () => {
     const loader = document.getElementById("loader");
     if (loader) {
         runBootSequence(() => loader.classList.add("hidden"));
@@ -293,7 +305,7 @@ function animateGauge(el) {
         const pistonTag = el.querySelector(".altimeter-tag--piston");
         const turbineTag = el.querySelector(".altimeter-tag--turbine");
         const targetPercent = Math.min(value / max, 1) * 100;
-        const duration = 850;
+        const duration = 1700;
         const start = performance.now();
 
         function altTick(now) {
@@ -502,5 +514,16 @@ if (navToggle && navMenu) {
             submitBtn.disabled = false;
             alert("Something went wrong sending your message — please email Dallas_Ind@gmail.com directly.");
         }
+    });
+})();
+
+// =====================================================
+// RADAR SWEEP — pause the SMIL rotation for users who
+// prefer reduced motion (CSS can't target SMIL directly).
+// =====================================================
+(function initRadarMotionPreference() {
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    document.querySelectorAll(".map-radar svg").forEach((svg) => {
+        if (typeof svg.pauseAnimations === "function") svg.pauseAnimations();
     });
 })();

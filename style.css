@@ -1990,13 +1990,6 @@ button:focus-visible {
     stroke: var(--accent);
     stroke-width: 1;
     opacity: 0.8;
-    transform-box: view-box;
-    transform-origin: 125px 125px;
-    animation: mapSweepSpin 4s linear infinite;
-}
-
-@keyframes mapSweepSpin {
-    to { transform: rotate(360deg); }
 }
 
 .map-ping {
@@ -2044,6 +2037,6 @@ button:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .map-sweep, .map-ping { animation: none; }
+    .map-ping { animation: none; }
     .map-blip { animation: none; opacity: 0.9; }
 }

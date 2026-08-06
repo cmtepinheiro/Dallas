@@ -307,7 +307,9 @@
                         <circle cx="125" cy="125" r="10" class="map-ping"></circle>
                         <circle cx="125" cy="125" r="10" class="map-ping map-ping--delay"></circle>
 
-                        <line x1="125" y1="125" x2="125" y2="10" class="map-sweep"></line>
+                        <line x1="125" y1="125" x2="125" y2="10" class="map-sweep">
+                            <animateTransform attributeName="transform" type="rotate" from="0 125 125" to="360 125 125" dur="4s" repeatCount="indefinite"></animateTransform>
+                        </line>
 
                         <circle cx="125" cy="125" r="118" class="map-outline"></circle>
                         <circle cx="125" cy="125" r="4" class="map-center"></circle>
