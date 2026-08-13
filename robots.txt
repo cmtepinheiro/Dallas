@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dallasautoind.vercel.app/sitemap.xml
