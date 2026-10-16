@@ -1,0 +1,162 @@
+/* =====================================================
+   NEWS & TECHNICAL NOTES — static per-language pages
+   Reuses the DALLAS instrument/HUD design system.
+===================================================== */
+
+nav a.nav-current { color: var(--accent); }
+
+.news-hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 14px;
+    padding: 160px 60px 60px;
+    background: radial-gradient(circle at 18% 30%, #3fdcff10 0%, var(--bg) 70%);
+}
+
+.news-back {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    transition: color 0.2s ease;
+}
+.news-back:hover { color: var(--text); }
+
+.news-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+}
+
+.news-hero h1 {
+    max-width: 900px;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.1;
+    color: var(--text);
+}
+
+.news-lead {
+    max-width: 760px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-dim);
+}
+
+.news-body {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 20px 32px 100px;
+}
+
+.news-section { margin-bottom: 64px; }
+
+.news-section > small {
+    display: block;
+    letter-spacing: 0.2em;
+    font-size: 12px;
+    margin-bottom: 22px;
+    color: var(--accent);
+}
+
+.news-section-title {
+    font-size: clamp(24px, 3vw, 34px);
+    margin-bottom: 28px;
+}
+
+.news-card {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    padding: 32px;
+}
+
+.news-meta {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+}
+
+.news-card h2 {
+    font-size: clamp(20px, 2.4vw, 26px);
+    line-height: 1.25;
+    margin-bottom: 16px;
+}
+
+.news-card h2 a { border-bottom: 1px solid var(--accent-dim); transition: border-color 0.2s ease; }
+.news-card h2 a:hover { border-color: var(--accent); }
+
+.news-card p {
+    max-width: 860px;
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text-dim);
+}
+
+.news-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    margin-top: 22px;
+}
+
+.news-links a {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    letter-spacing: 0.03em;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent-dim);
+    transition: border-color 0.2s ease;
+}
+.news-links a:hover { border-color: var(--accent); }
+
+.faq-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1px;
+    background: var(--panel-border);
+    border: 1px solid var(--panel-border);
+}
+
+.faq-item {
+    background: var(--bg);
+    padding: 28px;
+}
+
+.faq-item h3 {
+    font-size: 17px;
+    line-height: 1.35;
+    margin-bottom: 12px;
+    color: var(--text);
+}
+
+.faq-item p {
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--text-dim);
+}
+
+.faq-item p a { color: var(--accent); border-bottom: 1px solid var(--accent-dim); }
+.faq-item p a:hover { border-color: var(--accent); }
+
+.news-cta {
+    text-align: center;
+    padding: 48px 24px;
+    border: 1px solid var(--panel-border);
+    background: var(--panel);
+}
+.news-cta h2 { font-size: clamp(22px, 3vw, 30px); margin-bottom: 10px; }
+.news-cta p { color: var(--text-dim); margin-bottom: 22px; }
+
+@media (max-width: 860px) {
+    .news-hero { padding: 130px 24px 40px; }
+    .news-body { padding: 10px 20px 80px; }
+    .news-card { padding: 22px; }
+    .faq-list { grid-template-columns: 1fr; }
+    .faq-item { padding: 22px; }
+}
